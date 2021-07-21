@@ -6,5 +6,9 @@ import com.jacob.amazonproject.data.entities.User
 class UserRepository(
     private val userDao: UserDao
 ) {
+
     suspend fun insertUser(user: User) = userDao.insertUser(user)
+
+    suspend fun deleteAllUsers() = userDao.deleteAllUsers()
+
 }
