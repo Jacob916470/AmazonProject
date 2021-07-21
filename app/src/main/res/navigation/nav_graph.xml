@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.jacob.amazonproject.presentation.products.view.FragmentProducts"
+        android:label="Products"
+        tools:layout="@layout/fragment_products"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jacob.amazonproject.presentation.login.view.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProductDetails"
+        android:name="com.jacob.amazonproject.presentation.products.view.FragmentProductDetails"
+        android:label="FragmentProductDetails"
+        tools:layout="@layout/fragment_product_details"/>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.jacob.amazonproject.presentation.signup.view.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up"/>
+</navigation>
