@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="signUpViewModel"
             type="com.jacob.amazonproject.presentation.signup.viewModel.SignUpViewModel" />
@@ -40,37 +42,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
 
-                <EditText
-                    android:id="@+id/txtName"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Name"
-                    android:inputType="textPersonName" />
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name"
+                        android:text="@={signUpViewModel.txtName}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
 
-                <EditText
-                    android:id="@+id/txtEmailSign"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="E-mail"
-                    android:inputType="textEmailAddress" />
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtEmailSign"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="E-mail"
+                        android:inputType="textEmailAddress"
+                        android:text="@={signUpViewModel.txtEmail}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
 
-                <EditText
-                    android:id="@+id/txtPasswordSign"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Password"
-                    android:inputType="textPassword" />
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtPasswordSign"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:text="@={signUpViewModel.txtPassword}" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Space
                     android:layout_width="match_parent"
@@ -81,27 +98,26 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btnGuardarSign"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSaveSign"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="30dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/buttonns"
-                        android:text="Guardar"
-                        android:textColor="@color/black" />
+                        android:text="Guardar" />
 
-                    <Button
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnCancelar"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="30dp"
                         android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
                         android:layout_weight="1"
-                        android:backgroundTint="@color/buttonns"
-                        android:text="Cancelar"
-                        android:textColor="@color/black" />
+                        android:text="Cancelar" />
 
                 </LinearLayout>
             </LinearLayout>
