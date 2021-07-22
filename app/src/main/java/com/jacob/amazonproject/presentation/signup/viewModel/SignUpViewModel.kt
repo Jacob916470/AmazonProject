@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.jacob.amazonproject.data.database.CursoRoomDataBase
 import com.jacob.amazonproject.data.entities.User
 import com.jacob.amazonproject.data.repositories.UserRepository
-import com.jacob.amazonproject.presentation.core.callBack.ResultCallback
+import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 class SignUpViewModel(
     private val cursoRoomDataBase: CursoRoomDataBase,
     /** Creamos variable resultCallBack de tipo ResultCallBack agregadole un tipo  de variable "String"*/
-    private val resultCallBack: ResultCallback<String>
+    private val resultCallBack: ResultCallBack<String>
 ) : ViewModel() {
     private val userRepository = UserRepository(cursoRoomDataBase.userDao())
 
