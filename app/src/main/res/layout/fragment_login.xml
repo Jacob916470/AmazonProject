@@ -52,10 +52,12 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtEmail"
+                            android:id="@+id/txtEmailLogin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="E-mail"
+                            android:text="@={loginViewModel.txtEmailLogin}"
+
                             android:inputType="textEmailAddress" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,11 +71,12 @@
                         app:endIconMode="password_toggle">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/txtPassword"
+                            android:id="@+id/txtPasswordLogin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Password"
-                            android:inputType="textPassword" />
+                            android:inputType="textPassword"
+                            android:text="@={loginViewModel.txtPasswordLogin}"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Space
@@ -87,6 +90,7 @@
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnLogin"
+                            android:onClick="@{()->loginViewModel.getLogin()}"
                             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

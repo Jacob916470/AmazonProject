@@ -1,20 +1,21 @@
 package com.jacob.amazonproject.presentation.login.viewModel
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.jacob.amazonproject.data.database.CursoRoomDataBase
 import com.jacob.amazonproject.data.entities.User
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 
-class LoginViewModel(
+class LoginViewModelFactory(
     private val cursoRoomDataBase: CursoRoomDataBase,
     /** Creamos variable resultCallBack de tipo ResultCallBack agregadole un tipo  de variable "String"*/
     private val resultCallBack: ResultCallBack<User>
-): ViewModel() {
-    val  txtEmailLogin  = ObservableField("")
-    val txtPasswordLogin = ObservableField("")
-
-    fun getLogin(){
-
+) : ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return LoginViewModel(
+            cursoRoomDataBase,
+            /** Retornamos la variable resultCallBack, y se implementa en el SignUpViewModel*/
+            resultCallBack
+        ) as T
     }
 }

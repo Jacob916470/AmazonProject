@@ -7,7 +7,7 @@ class UserRepository(
     private val userDao: UserDao
 ) {
 
-    suspend fun insertUser(user: User) = userDao.insertUser(user)
+    suspend fun insertUser(user: User): Long = userDao.insertUser(user)
 
     suspend fun deleteAllUsers() = userDao.deleteAllUsers()
 

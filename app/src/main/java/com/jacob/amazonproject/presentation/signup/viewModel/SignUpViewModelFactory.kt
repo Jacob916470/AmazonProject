@@ -15,6 +15,6 @@ class SignUpViewModelFactory(
             cursoRoomDataBase,
             /** Retornamos la variable resultCallBack, y se implementa en el SignUpViewModel*/
             resultCallBack
-            ) as T
+        ) as T
     }
 }

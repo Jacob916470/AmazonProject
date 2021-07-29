@@ -6,10 +6,7 @@ import com.jacob.amazonproject.data.database.CursoRoomDataBase
 import com.jacob.amazonproject.data.entities.User
 import com.jacob.amazonproject.data.repositories.UserRepository
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class SignUpViewModel(
     private val cursoRoomDataBase: CursoRoomDataBase,
@@ -17,7 +14,7 @@ class SignUpViewModel(
     private val resultCallBack: ResultCallBack<String>
 ) : ViewModel() {
     private val userRepository = UserRepository(cursoRoomDataBase.userDao())
-
+    var job: Job? = null
     /**
      * Se crean variables y las igualamos a un ObservableField la cual sera decalarada como vacia.
      * Se crean las variables en el XML del mismo para poder traer la informacion de las cajas de texto
@@ -26,25 +23,32 @@ class SignUpViewModel(
     val txtEmail = ObservableField("")
     val txtPassword = ObservableField("")
 
-    /** Creamos la función privada de inserUser y la igualamos a un GlobalScope para poner lo en una corutina */
-    private fun insertUser() = GlobalScope.launch {
-        userRepository.insertUser(
-            /** Mandamos a llamar los campos de la tabla que creamos y las igualamos a las variables
-             * que se crearon para obtener la información de las cajas de texto */
-            user = User(
-                name = txtName.get().toString(),
-                age = 23,
-                mail = txtEmail.get().toString(),
-                password = txtPassword.get().toString(),
-                autoAccept = true
+    /** Creamos la función privada de inserUser y la igualamos a un GlobalScope para poner lo en una corutina (GlobalScope)*/
+    private fun insertUser() {
+        job = CoroutineScope(Dispatchers.IO).launch {
+
+            val rows = userRepository.insertUser(
+                /** Mandamos a llamar los campos de la tabla que creamos y las igualamos a las variables
+                 * que se crearon para obtener la información de las cajas de texto */
+                user = User(
+                    name = txtName.get().toString(),
+                    age = 23,
+                    mail = txtEmail.get().toString(),
+                    password = txtPassword.get().toString(),
+                    autoAccept = true
+                )
             )
-        )
-        /** Termina nuestra corrutina e iniciamos en el hilo principal
-         * Cuando llega aqui significa que la corutina ha terminado...*/
-        withContext(Dispatchers.Main) {
-            /** Mandamos a llamar la variable resultCallBack.onSuccess para mandarle un mensaje al usuario.
-             * Este mensaje se implementara en el SignUpFragment */
-            resultCallBack.onSuccess(txtName.get().toString())
+            /** Termina nuestra corrutina e iniciamos en el hilo principal
+             * Cuando llega aqui significa que la corutina ha terminado...*/
+            withContext(Dispatchers.Main) {
+                if (rows>0){
+                    /** Mandamos a llamar la variable resultCallBack.onSuccess para mandarle un mensaje al usuario.
+                     * Este mensaje se implementara en el SignUpFragment */
+                    resultCallBack.onSuccess(txtName.get().toString())
+                }else{
+                    resultCallBack.onError("No se inserto correctamente a la base de datos")
+                }
+            }
         }
     }
 
@@ -68,6 +72,11 @@ class SignUpViewModel(
             }
         }
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        job?.cancel()
     }
 }
 /** data/data/jacob(package del proyecto/database)*/
