@@ -40,7 +40,7 @@ class SignUpViewModel(
             )
         )
         /** Termina nuestra corrutina e iniciamos en el hilo principal
-         * Cuando llega aqui significa que la corutina ha terminado*/
+         * Cuando llega aqui significa que la corutina ha terminado...*/
         withContext(Dispatchers.Main) {
             /** Mandamos a llamar la variable resultCallBack.onSuccess para mandarle un mensaje al usuario.
              * Este mensaje se implementara en el SignUpFragment */
