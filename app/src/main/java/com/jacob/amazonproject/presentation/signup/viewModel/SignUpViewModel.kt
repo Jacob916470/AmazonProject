@@ -5,16 +5,18 @@ import androidx.lifecycle.ViewModel
 import com.jacob.amazonproject.data.database.CursoRoomDataBase
 import com.jacob.amazonproject.data.entities.User
 import com.jacob.amazonproject.data.repositories.UserRepository
+import com.jacob.amazonproject.data.utils.Configuration
+import com.jacob.amazonproject.presentation.core.base.BaseViewModel
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
+import com.jacob.amazonproject.presentation.utils.FieldValidation
 import kotlinx.coroutines.*
 
 class SignUpViewModel(
     private val cursoRoomDataBase: CursoRoomDataBase,
     /** Creamos variable resultCallBack de tipo ResultCallBack agregadole un tipo  de variable "String"*/
     private val resultCallBack: ResultCallBack<String>
-) : ViewModel() {
+) : BaseViewModel() {
     private val userRepository = UserRepository(cursoRoomDataBase.userDao())
-    var job: Job? = null
     /**
      * Se crean variables y las igualamos a un ObservableField la cual sera decalarada como vacia.
      * Se crean las variables en el XML del mismo para poder traer la informacion de las cajas de texto
@@ -25,6 +27,7 @@ class SignUpViewModel(
 
     /** Creamos la función privada de inserUser y la igualamos a un GlobalScope para poner lo en una corutina (GlobalScope)*/
     private fun insertUser() {
+        /** Reliza un trabajo de una corutina*/
         job = CoroutineScope(Dispatchers.IO).launch {
 
             val rows = userRepository.insertUser(
@@ -67,16 +70,33 @@ class SignUpViewModel(
                 resultCallBack.onError("Necesitamos una contraseñapara tu cuenta")
             }
             else -> {
-                /** Mandamos a llamar la funcion insertUser para que guarde la informacón del usuario*/
-                insertUser()
+                validateUser()
             }
         }
 
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        job?.cancel()
+    private fun validateUser() {
+        job = CoroutineScope(Dispatchers.IO).launch{
+            val userCount = userRepository.getUserName(txtName.get().toString())
+            withContext(Dispatchers.Main){
+                if (userCount==0){
+                    validations()
+                }else{
+                    resultCallBack.onError("Ya existe un usuario con ese nombre")
+                }
+            }
+        }
+    }
+
+    private fun validations() {
+        if (FieldValidation.isPasswordSafe(password = txtPassword.get().toString()) &&
+            FieldValidation.isPasswordLengthValid(password = txtPassword.get().toString())){
+            /** Mandamos a llamar la funcion insertUser para que guarde la informacón del usuario*/
+            insertUser()
+        }else{
+            resultCallBack.onError("Tu contraseña necesita tener una mayuscula, una minulcula y por lo menos un caracter, y de 8 a 16 digitos")
+        }
     }
 }
 /** data/data/jacob(package del proyecto/database)*/

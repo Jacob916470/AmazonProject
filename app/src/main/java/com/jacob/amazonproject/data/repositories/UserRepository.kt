@@ -11,4 +11,6 @@ class UserRepository(
 
     suspend fun deleteAllUsers() = userDao.deleteAllUsers()
 
+    suspend fun getUserName(nameUser : String) = userDao.getUserName(nameUser = nameUser)
+
 }
