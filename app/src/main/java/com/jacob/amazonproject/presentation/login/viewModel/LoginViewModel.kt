@@ -1,10 +1,9 @@
 package com.jacob.amazonproject.presentation.login.viewModel
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.ViewModel
-import com.jacob.amazonproject.data.database.CursoRoomDataBase
-import com.jacob.amazonproject.data.entities.User
-import com.jacob.amazonproject.data.repositories.UserRepository
+import com.jacob.amazonproject.data.local.database.CursoRoomDataBase
+import com.jacob.amazonproject.data.local.entities.User
+import com.jacob.amazonproject.data.local.repositories.UserRepository
 import com.jacob.amazonproject.presentation.core.base.BaseViewModel
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 import kotlinx.coroutines.CoroutineScope

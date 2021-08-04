@@ -1,11 +1,11 @@
-package com.jacob.amazonproject.data.database
+package com.jacob.amazonproject.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jacob.amazonproject.data.dao.UserDao
-import com.jacob.amazonproject.data.entities.User
+import com.jacob.amazonproject.data.local.dao.UserDao
+import com.jacob.amazonproject.data.local.entities.User
 
 @Database(
     entities = [

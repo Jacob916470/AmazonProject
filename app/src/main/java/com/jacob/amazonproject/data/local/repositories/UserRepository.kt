@@ -1,7 +1,7 @@
-package com.jacob.amazonproject.data.repositories
+package com.jacob.amazonproject.data.local.repositories
 
-import com.jacob.amazonproject.data.dao.UserDao
-import com.jacob.amazonproject.data.entities.User
+import com.jacob.amazonproject.data.local.dao.UserDao
+import com.jacob.amazonproject.data.local.entities.User
 
 class UserRepository(
     private val userDao: UserDao

@@ -9,10 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.button.MaterialButton
 import com.jacob.amazonproject.R
-import com.jacob.amazonproject.data.database.CursoRoomDataBase
-import com.jacob.amazonproject.data.entities.User
+import com.jacob.amazonproject.data.local.database.CursoRoomDataBase
+import com.jacob.amazonproject.data.local.entities.User
 import com.jacob.amazonproject.databinding.FragmentLoginBinding
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 import com.jacob.amazonproject.presentation.login.viewModel.LoginViewModel

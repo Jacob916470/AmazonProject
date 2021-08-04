@@ -1,4 +1,4 @@
-package com.jacob.amazonproject.data.entities
+package com.jacob.amazonproject.data.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

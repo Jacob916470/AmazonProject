@@ -1,10 +1,10 @@
-package com.jacob.amazonproject.data.dao
+package com.jacob.amazonproject.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.jacob.amazonproject.data.entities.User
+import com.jacob.amazonproject.data.local.entities.User
 
 @Dao
 interface UserDao {

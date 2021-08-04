@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.jacob.amazonproject.R
-import com.jacob.amazonproject.data.database.CursoRoomDataBase
+import com.jacob.amazonproject.data.local.database.CursoRoomDataBase
 import com.jacob.amazonproject.databinding.FragmentSignUpBinding
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 import com.jacob.amazonproject.presentation.signup.viewModel.SignUpViewModel

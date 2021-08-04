@@ -2,7 +2,7 @@ package com.jacob.amazonproject.presentation.signup.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.jacob.amazonproject.data.database.CursoRoomDataBase
+import com.jacob.amazonproject.data.local.database.CursoRoomDataBase
 import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 
 class SignUpViewModelFactory(
