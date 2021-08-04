@@ -18,6 +18,10 @@ interface UserDao {
     @Query("DELETE FROM user")
     suspend fun deleteAllUsers()
 
+    /** Creamos una nueva Query la cual nos ayudara a obtener el "nameUser" y la posición del  usuario*/
     @Query("SELECT COUNT(*) FROM user WHERE name = :nameUser")
     suspend fun getUserName(nameUser: String): Int
+
+    @Query("SELECT * FROM user WHERE mail = :email AND password = :password")
+    suspend fun getLogin(email: String, password: String): User?
 }

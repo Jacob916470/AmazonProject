@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jacob/AndroidStudioProjects/AmazonProject/app/src/main/res/layout/activity_main.xml" value="0.18931159420289856" />
         <entry key="..\:/Users/jacob/AndroidStudioProjects/AmazonProject/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/Users/jacob/AndroidStudioProjects/AmazonProject/app/src/main/res/layout/fragment_products.xml" value="0.11684782608695653" />
+        <entry key="..\:/Users/jacob/AndroidStudioProjects/AmazonProject/app/src/main/res/layout/item_products.xml" value="0.16394927536231885" />
       </map>
     </option>
   </component>

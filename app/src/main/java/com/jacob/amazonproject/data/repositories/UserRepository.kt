@@ -11,6 +11,12 @@ class UserRepository(
 
     suspend fun deleteAllUsers() = userDao.deleteAllUsers()
 
+    /** Creamos "suspend fun getUserName" para poder obtener un String y a su ves un Int para poder validar
+     * si ya es un usuario ya esta registrado*/
     suspend fun getUserName(nameUser : String) = userDao.getUserName(nameUser = nameUser)
+
+    suspend fun getLogin(email: String, password: String): User?{
+        return userDao.getLogin(email,password)
+    }
 
 }

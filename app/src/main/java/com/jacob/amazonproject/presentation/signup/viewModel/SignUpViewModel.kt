@@ -11,6 +11,7 @@ import com.jacob.amazonproject.presentation.core.callBack.ResultCallBack
 import com.jacob.amazonproject.presentation.utils.FieldValidation
 import kotlinx.coroutines.*
 
+/** Heredamos de "BaseViewModel"*/
 class SignUpViewModel(
     private val cursoRoomDataBase: CursoRoomDataBase,
     /** Creamos variable resultCallBack de tipo ResultCallBack agregadole un tipo  de variable "String"*/
@@ -27,7 +28,7 @@ class SignUpViewModel(
 
     /** Creamos la función privada de inserUser y la igualamos a un GlobalScope para poner lo en una corutina (GlobalScope)*/
     private fun insertUser() {
-        /** Reliza un trabajo de una corutina*/
+        /** Reliza un trabajo de una coroutine */
         job = CoroutineScope(Dispatchers.IO).launch {
 
             val rows = userRepository.insertUser(
@@ -41,8 +42,8 @@ class SignUpViewModel(
                     autoAccept = true
                 )
             )
-            /** Termina nuestra corrutina e iniciamos en el hilo principal
-             * Cuando llega aqui significa que la corutina ha terminado...*/
+            /** Termina nuestra coroutine e iniciamos en el hilo principal
+             * Cuando llega aqui significa que la coroutine ha terminado...*/
             withContext(Dispatchers.Main) {
                 if (rows>0){
                     /** Mandamos a llamar la variable resultCallBack.onSuccess para mandarle un mensaje al usuario.
@@ -76,9 +77,12 @@ class SignUpViewModel(
 
     }
 
+    /** Creamos función "validateUser" la cual accedera a coroutine y despuesd de validar
+     *  esa coroutine regresara a nuestro hilo principal */
     private fun validateUser() {
         job = CoroutineScope(Dispatchers.IO).launch{
             val userCount = userRepository.getUserName(txtName.get().toString())
+            /** Entra a nuestro hilo principal y se realizara la acción que solicite */
             withContext(Dispatchers.Main){
                 if (userCount==0){
                     validations()
