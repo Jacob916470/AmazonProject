@@ -11,11 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jacob.amazonproject.R
+import com.jacob.amazonproject.data.network.repositories.MoviesPopularNetworkRepository
 import com.jacob.amazonproject.databinding.FragmentProductsBinding
+import com.jacob.amazonproject.domain.useCases.GetMoviesPopularUseCase
 import com.jacob.amazonproject.presentation.core.callBack.OnItemClickListener
 import com.jacob.amazonproject.presentation.products.adapters.ProductsAdapter
 import com.jacob.amazonproject.presentation.products.model.DataProducts
 import com.jacob.amazonproject.presentation.products.viewModel.ProductsViewModel
+import com.jacob.amazonproject.presentation.products.viewModel.ProductsViewModelFactory
 
 class FragmentProducts: Fragment(), OnItemClickListener<DataProducts> {
 
@@ -39,7 +42,10 @@ class FragmentProducts: Fragment(), OnItemClickListener<DataProducts> {
 
         fragmentProductsBinding?.productsViewModel =
             ViewModelProvider(
-                this
+                this,
+                ProductsViewModelFactory(
+                    GetMoviesPopularUseCase(MoviesPopularNetworkRepository())
+                )
             ).get(ProductsViewModel::class.java)
 
         return fragmentProductsBinding?.root

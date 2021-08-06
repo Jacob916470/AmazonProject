@@ -51,13 +51,14 @@ class LoginFragment: Fragment(), ResultCallBack<User> {
 
         return fragmentLoginBinding?.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoginBinding?.btnSignUp?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-        fragmentLoginBinding?.btnLogin
+        fragmentLoginBinding?.btnLogin?.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_productsFragment)
+        }
     }
 
     override fun onSuccess(type: User) {
