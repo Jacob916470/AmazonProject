@@ -8,13 +8,16 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jacob.amazonproject.R
+import com.jacob.amazonproject.data.network.models.Result
+import com.jacob.amazonproject.data.utils.Configurations
 import com.jacob.amazonproject.presentation.core.callBack.OnItemClickListener
 import com.jacob.amazonproject.presentation.products.model.DataProducts
 
 class ProductsAdapter(
-    private val productsList: List<DataProducts>,
-    private val onItemClickListener: OnItemClickListener<DataProducts>
+    private val productsList: List<Result>,
+    private val onItemClickListener: OnItemClickListener<Result>
 ) : RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder>() {
 
 
@@ -26,11 +29,14 @@ class ProductsAdapter(
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         val product = productsList[position]
-        product.img?.let { holder.image?.setImageResource(it) }
-        holder.nameProducts.text = product.name
+        Glide
+            .with(holder.view.context)
+            .load(Configurations.IMAGE_BASE_URL.plus(product.posterPath))
+            .into(holder.image)
+        holder.nameProducts.text = product.title
         //product.ratingB?.toFloat()?.let { holder.ratingBar?.rating = it }
-        holder.ratingBar?.rating = product.ratingB?.toFloat()?:0f
-        holder.priceProducts.text = product.price
+        holder.ratingBar?.rating = product.voteAverage?.toFloat()?:0f
+        holder.priceProducts.text = product.releaseDate
         holder.container.setOnClickListener {
             onItemClickListener.onItemClick(product)
         }

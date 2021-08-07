@@ -8,6 +8,7 @@ class Configurations {
         const val MIN_PASSWORD_LENGTH = 8
         const val MAX_PASSWORD_LENGTH = 16
         const val MOVIE_API_KEY = "1f54bd990f1cdfb230adb312546d765d"
+        const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
     }
 
     private val currentConfiguration = "dev"

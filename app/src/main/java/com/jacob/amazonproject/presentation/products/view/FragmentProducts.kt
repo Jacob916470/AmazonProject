@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jacob.amazonproject.R
+import com.jacob.amazonproject.data.network.models.Result
 import com.jacob.amazonproject.data.network.repositories.MoviesPopularNetworkRepository
 import com.jacob.amazonproject.databinding.FragmentProductsBinding
 import com.jacob.amazonproject.domain.useCases.GetMoviesPopularUseCase
@@ -20,7 +21,7 @@ import com.jacob.amazonproject.presentation.products.model.DataProducts
 import com.jacob.amazonproject.presentation.products.viewModel.ProductsViewModel
 import com.jacob.amazonproject.presentation.products.viewModel.ProductsViewModelFactory
 
-class FragmentProducts: Fragment(), OnItemClickListener<DataProducts> {
+class FragmentProducts: Fragment(), OnItemClickListener<Result> {
 
     private var fragmentProductsBinding: FragmentProductsBinding? = null
 
@@ -54,20 +55,20 @@ class FragmentProducts: Fragment(), OnItemClickListener<DataProducts> {
     /** viewLifecycleOwner = es el owner del observer*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentProductsBinding?.productsViewModel?.productL?.observe(
-            viewLifecycleOwner,{products ->
-                if (products.isNotEmpty()){
+        fragmentProductsBinding?.productsViewModel?.moviesPopularResponseMLD?.observe(
+            viewLifecycleOwner,{moviesResponse ->
+                if (moviesResponse.results.isNotEmpty()){
                     fragmentProductsBinding?.rvProducts?.apply {
                         layoutManager = LinearLayoutManager(context)
-                        adapter = ProductsAdapter(products,this@FragmentProducts)
+                        adapter = ProductsAdapter(moviesResponse.results,this@FragmentProducts)
                     }
                 }
             }
         )
     }
 
-    override fun onItemClick(item: DataProducts, type: String?) {
-        val bundle = bundleOf("image" to item.img)
+    override fun onItemClick(item: Result, type: String?) {
+        //val bundle = bundleOf("image" to item.img)
       // findNavController().navigate(R.id.action_productsFragment_to_fragmentProductDetails,bundle)
     }
 }

@@ -56,16 +56,15 @@ class LoginFragment: Fragment(), ResultCallBack<User> {
         fragmentLoginBinding?.btnSignUp?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-        fragmentLoginBinding?.btnLogin?.setOnClickListener{
-            findNavController().navigate(R.id.action_loginFragment_to_productsFragment)
-        }
     }
 
     override fun onSuccess(type: User) {
         Toast.makeText(requireContext(), "Bienvenido ${type.name}", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_loginFragment_to_productsFragment)
     }
 
     override fun onError(message: String, type: User?) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
 }
