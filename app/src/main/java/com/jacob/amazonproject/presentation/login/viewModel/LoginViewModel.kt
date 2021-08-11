@@ -15,26 +15,26 @@ class LoginViewModel(
     cursoRoomDataBase: CursoRoomDataBase,
     /** Creamos variable resultCallBack de tipo ResultCallBack agregadole un tipo  de variable "String"*/
     private val resultCallBack: ResultCallBack<User>
-): BaseViewModel() {
-    val  txtEmailLogin  = ObservableField("")
+) : BaseViewModel() {
+    val txtEmailLogin = ObservableField("")
     val txtPasswordLogin = ObservableField("")
 
     /** Se crea variable para el repository que accede a la base de datos*/
     private val userRepository = UserRepository(cursoRoomDataBase.userDao())
 
-    fun getLogin(){
+    fun getLogin() {
         validateLogin()
     }
 
-    private fun validateLogin(){
+    private fun validateLogin() {
         job = CoroutineScope(Dispatchers.IO).launch {
             val user = userRepository.getLogin(
-                email = txtEmailLogin.get().toString(),password = txtPasswordLogin.get().toString()
+                email = txtEmailLogin.get().toString(), password = txtPasswordLogin.get().toString()
             )
-            withContext(Dispatchers.Main){
-                if (user!=null){
+            withContext(Dispatchers.Main) {
+                if (user != null) {
                     resultCallBack.onSuccess(user)
-                }else{
+                } else {
                     resultCallBack.onError("E-mail or password inccorect")
                 }
             }
