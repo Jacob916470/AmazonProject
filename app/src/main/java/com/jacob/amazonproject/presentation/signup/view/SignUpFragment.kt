@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.jacob.amazonproject.R
 import com.jacob.amazonproject.data.local.database.CursoRoomDataBase
 import com.jacob.amazonproject.databinding.FragmentSignUpBinding
@@ -24,6 +25,7 @@ import com.jacob.amazonproject.presentation.signup.viewModel.SignUpViewModelFact
 class SignUpFragment : Fragment(), View.OnClickListener, ResultCallBack<String> {
 
     private var fragmentSignUpBinding: FragmentSignUpBinding? = null
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,7 @@ class SignUpFragment : Fragment(), View.OnClickListener, ResultCallBack<String> 
         arguments?.let {
 
         }
+        firebaseAnalytics = FirebaseAnalytics.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -55,7 +58,16 @@ class SignUpFragment : Fragment(), View.OnClickListener, ResultCallBack<String> 
                 )
             ).get(SignUpViewModel::class.java)
 
+        sendEvent()
+
         return fragmentSignUpBinding?.root
+    }
+
+
+    private fun sendEvent() {
+        val bundle: Bundle = Bundle()
+        bundle.putString("screen","SignUp")
+        firebaseAnalytics.logEvent("SIGNUP",bundle)
     }
 
     /** Creamos onViewCreated para confirmar que la vista ya esta creada*/
@@ -100,6 +112,15 @@ class SignUpFragment : Fragment(), View.OnClickListener, ResultCallBack<String> 
         /** Mandamos a llamar a la función dissmiss para que si hubó una proceso exitoso
          * nos mande directo a la vista login */
         dismiss()
+        sendEventTwo(type)
+
+    }
+
+    private fun sendEventTwo(name:String) {
+        val bundle: Bundle = Bundle()
+        bundle.putString("click","Saving")
+        bundle.putString("new_user",name)
+        firebaseAnalytics.logEvent("CLICK",bundle)
     }
 
     override fun onError(message: String, type: String?) {

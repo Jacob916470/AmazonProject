@@ -55,6 +55,7 @@ class LoginFragment: Fragment(), ResultCallBack<User> {
         super.onViewCreated(view, savedInstanceState)
         fragmentLoginBinding?.btnSignUp?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+          //throw RuntimeException("Test Crash") // Force a crash
         }
     }
 

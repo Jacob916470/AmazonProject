@@ -1,6 +1,7 @@
 package com.jacob.amazonproject.presentation.core.base
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.Job
 
 /** Creamos un open class "BaseViewModel" y heredamos de ViewModel para poder acceder a las funciones de la clase
